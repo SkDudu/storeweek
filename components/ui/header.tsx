@@ -10,12 +10,15 @@ import { Separator } from "./separator"
 
 const Header = () => {
     const {status, data} = useSession()
+
     const handleLogin = async () => {
         await signIn()
     }
+
     const handleLogout = async () => {
         await signOut()
     }
+
     return(
         <Card className="flex items-center justify-between p-[1.88rem]">
             <Sheet>
@@ -29,48 +32,54 @@ const Header = () => {
                         Menu
                     </SheetHeader>
 
-                    {status === "authenticated" && data?.user && (
-                        <div className="flex items-center gap-2">
-                            <Avatar>
-                                <AvatarFallback>
-                                    {data.user.name?.[0].toUpperCase()}
-                                </AvatarFallback>
-                                {data.user.image && <AvatarImage src={data.user.image}/>}
-                            </Avatar>
-
-                            <p>{data.user.name}</p>
-                        </div>
-                    )}
-
                     <Separator className="my-2"/>
 
-                    <div className="flex flex-col gap-2">
-                        {status === "unauthenticated" && (
-                            <Button variant={"default"} className="w-full justify-start gap-1 mb-4" onClick={handleLogin}>
-                                <LogInIcon size={18}/>
-                                Fazer login
+                    <div className="flex flex-col justify-between">
+                        <div className="flex flex-col gap-2">
+                            <h1>Bem vindo!</h1>
+                            <Button variant={"outline"} className="w-full justify-start gap-1">
+                                <HomeIcon size={18}/>
+                                Início
                             </Button>
-                        )}
-
-                        {status === "authenticated" && (
-                            <Button variant={"default"} className="w-full justify-start gap-1 mb-4 bg-red-600 hover:bg-red-700" onClick={handleLogout}>
-                                <LogOutIcon size={18}/>
-                                Logout
+                            <Button variant={"outline"} className="w-full justify-start gap-1">
+                                <PercentIcon size={18}/>
+                                Ofertas
                             </Button>
-                        )}
+                            <Button variant={"outline"} className="w-full justify-start gap-1">
+                                <ListOrderedIcon size={18}/>
+                                Catálogo
+                            </Button>
+                            <Separator className="mb-2"/>
+                        </div>
 
-                        <Button variant={"outline"} className="w-full justify-start gap-1">
-                            <HomeIcon size={18}/>
-                            Início
-                        </Button>
-                        <Button variant={"outline"} className="w-full justify-start gap-1">
-                            <PercentIcon size={18}/>
-                            Ofertas
-                        </Button>
-                        <Button variant={"outline"} className="w-full justify-start gap-1">
-                            <ListOrderedIcon size={18}/>
-                            Catálogo
-                        </Button>
+                        <div className="flex flex-col gap-2">
+                            {status === "authenticated" && data?.user && (
+                                <div className="flex items-center gap-2">
+                                    <Avatar>
+                                        <AvatarFallback>
+                                            {data.user.name?.[0].toUpperCase()}
+                                        </AvatarFallback>
+                                        {data.user.image && <AvatarImage src={data.user.image}/>}
+                                    </Avatar>
+
+                                    <p>{data.user.name}</p>
+                                </div>
+                            )}
+
+                            {status === "unauthenticated" && (
+                                <Button variant={"default"} className="w-full justify-start gap-1 mb-4" onClick={handleLogin}>
+                                    <LogInIcon size={18}/>
+                                    Fazer login
+                                </Button>
+                            )}
+
+                            {status === "authenticated" && (
+                                <Button variant={"default"} className="w-full justify-start gap-1 mb-4 bg-red-600 hover:bg-red-700" onClick={handleLogout}>
+                                    <LogOutIcon size={18}/>
+                                    Logout
+                                </Button>
+                            )}
+                        </div>
                     </div>
                 </SheetContent>
             </Sheet>
