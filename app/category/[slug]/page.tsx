@@ -3,6 +3,8 @@ import { computProductsTotalPrice } from "@/app/helpers/product";
 import { Badge } from "@/components/ui/badge";
 import ProductItem from "@/components/ui/productItem";
 import { prismaClient } from "@/lib/prisma";
+import { ArrowLeftIcon } from "lucide-react";
+import Link from "next/link";
 
 const CategoryProducts = async ({params}: any) => {
     const category = await prismaClient.category.findFirst({
@@ -21,6 +23,12 @@ const CategoryProducts = async ({params}: any) => {
 
     return (
         <div className="p-5">
+            <Link href="/">
+                <div className="flex flex-row gap-2 h-8 mb-2">
+                    <ArrowLeftIcon />
+                    <p>Voltar</p>
+                </div>
+            </Link>
             <Badge variant="outline" className="gap-1 border-primary text-base uppercase py-1 border-2">
                 {CATEGORY_ICON[params.slug as keyof typeof CATEGORY_ICON]}
                 {category.name}
