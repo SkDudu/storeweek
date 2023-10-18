@@ -4,9 +4,10 @@ import {signIn, signOut, useSession} from "next-auth/react"
 import { MenuIcon, ShoppingCartIcon, LogInIcon, PercentIcon, ListOrderedIcon, HomeIcon, LogOutIcon } from "lucide-react"
 import { Button } from "./button"
 import { Card } from "./card"
-import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "./sheet"
+import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTrigger } from "./sheet"
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar"
 import { Separator } from "./separator"
+import Link from "next/link"
 
 const Header = () => {
     const {status, data} = useSession()
@@ -37,18 +38,26 @@ const Header = () => {
                     <div className="flex flex-col justify-between">
                         <div className="flex flex-col gap-2">
                             <h1>Bem vindo!</h1>
-                            <Button variant={"outline"} className="w-full justify-start gap-1">
-                                <HomeIcon size={18}/>
-                                Início
-                            </Button>
+                            <SheetClose asChild>
+                                <Link href="/">
+                                    <Button variant={"outline"} className="w-full justify-start gap-1">
+                                        <HomeIcon size={18}/>
+                                        Início
+                                    </Button>
+                                </Link>
+                            </SheetClose>
                             <Button variant={"outline"} className="w-full justify-start gap-1">
                                 <PercentIcon size={18}/>
                                 Ofertas
                             </Button>
-                            <Button variant={"outline"} className="w-full justify-start gap-1">
-                                <ListOrderedIcon size={18}/>
-                                Catálogo
-                            </Button>
+                            <SheetClose asChild>
+                                <Link href="/catalog">
+                                    <Button variant={"outline"} className="w-full justify-start gap-1">
+                                        <ListOrderedIcon size={18}/>
+                                        Catálogo
+                                    </Button>
+                                </Link>
+                            </SheetClose>
                             <Separator className="mb-2"/>
                         </div>
 
