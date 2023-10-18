@@ -11,7 +11,7 @@ interface ProductListProps {
 
 const ProductList = ({products}: ProductListProps) => {
     return (
-        <div>
+        <div className="flex flex-row gap-2">
             {products.map((product)=>(
                 <ProductItem key={product.id} product={computProductsTotalPrice(product)}/>
             ))}
