@@ -1,8 +1,10 @@
-import { Product } from "@prisma/client";
+import { ProductWithTotalPrice } from "@/app/helpers/product";
 import Image from "next/image";
+import { Badge } from "./badge";
+import { ArrowDown01Icon, ArrowDownIcon } from "lucide-react";
 
 interface ProductItemProps {
-    product: Product
+    product: ProductWithTotalPrice
 }
 
 const ProductItem = ({product}: ProductItemProps) => {
@@ -20,9 +22,27 @@ const ProductItem = ({product}: ProductItemProps) => {
                     }}
                     alt={product.name}
                 />
+                
+                {product.discount > 0 && (
+                    <Badge className="absolute left-2 top-2">
+                        <ArrowDownIcon size={16}/>
+                        {product.discount}%
+                    </Badge>
+                )}
             </div>
+
             <div>
                 <p className="text-sm overflow-hidden whitespace-nowrap text-ellipsis">{product.name}</p>
+                <div className="flex flex-row items-center gap-2">
+                    {product.discount > 0 ? (
+                        <>
+                            <p className="font-semibold">R$ {product.totalPrice.toFixed(2)}</p>
+                            <p className=" text-xs opacity-75 line-through">R$ {Number(product.baseprice).toFixed(2)}</p>
+                        </>
+                    ) : (
+                        <p className="font-semibold">R$ {product.totalPrice.toFixed(2)}</p>
+                    )}
+                </div>
             </div>
         </div>
     );
