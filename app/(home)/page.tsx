@@ -8,6 +8,7 @@ import ProductList from './components/productList'
 import banner01 from "../../public/banner01.png"
 import banner02 from "../../public/banner02.png"
 import banner03 from "../../public/banner03.png"
+import Footer from '@/components/ui/footer'
 
 export default async function Home() {
   const deals = await prismaClient.product.findMany({
@@ -81,6 +82,6 @@ export default async function Home() {
           <h1 className='font-bold uppercase mb-2'>Mouses</h1>
           <ProductList products={mouses}/>
         </div>
-      </div>
+    </div>
   )
 }
