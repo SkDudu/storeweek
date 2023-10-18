@@ -9,9 +9,9 @@ export const computProductsTotalPrice = (product: Product): ProductWithTotalPric
         return{...product, totalPrice: Number(product.baseprice)}
     }
 
-    const totalPrice = Number(product.baseprice) * (product.discount) / 100
+    const totalDiscount = Number(product.baseprice) * (product.discount) / 100
 
     return{
-        ...product, totalPrice
+        ...product, totalPrice: Number(product.baseprice) - totalDiscount
     }
 }
