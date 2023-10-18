@@ -1,6 +1,8 @@
 "use client"
-import { useSession } from 'next-auth/react'
+
 import Image from 'next/image'
+
+import CategoriesMenu from './components/categoriesMenu'
 
 import banner01 from "../../public/banner01.png"
 
@@ -15,6 +17,10 @@ export default function Home() {
         className='h-auto w-full'
         sizes='100vw'
       />
+
+      <div className='mt-8'>
+        <CategoriesMenu />
+      </div>
     </div>
   )
 }
