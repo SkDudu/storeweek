@@ -24,6 +24,7 @@ model Product {
   description String
   slug        String
   baseprice   Decimal  @db.Decimal(8, 2)
+  imageUrl    String
   imageUrls   String[]
   categoryId  String
   discount    Int      @default(0)
