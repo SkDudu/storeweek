@@ -2,6 +2,9 @@ import { ShoppingCart } from "lucide-react";
 import { Badge } from "./badge";
 import { useContext } from "react";
 import { CartContext } from "@/app/providers/cart";
+import CartItem from "./cartItem";
+import { computProductsTotalPrice } from "@/app/helpers/product";
+import { Separator } from "./separator";
 
 const Cart = () => {
     const { products } = useContext(CartContext)
@@ -12,7 +15,9 @@ const Cart = () => {
                 Carrinho
             </Badge>
 
-            {products.map(product => <h1 key={product.id}>{product.name}</h1>)}
+            <Separator className="mt-4"/>
+
+            {products.map(product => <CartItem key={product.id} product={computProductsTotalPrice(product as any)}/>)}
         </div>
     );
 }
