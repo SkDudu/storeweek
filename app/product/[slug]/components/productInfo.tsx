@@ -1,20 +1,21 @@
 "use client"
 
 import { ProductWithTotalPrice } from "@/app/helpers/product";
+import { CartContext } from "@/app/providers/cart";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowDownIcon, ArrowLeftIcon, ArrowRightIcon, TruckIcon } from "lucide-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 interface ProductInfoProps {
-    product: Pick<
-    ProductWithTotalPrice,
-    "baseprice" | "description" | "discount" | "totalPrice" | "name"
-    >
+    product: ProductWithTotalPrice
 }
 
-const ProductInfo = ({product: {name, baseprice, description, discount, totalPrice}}: ProductInfoProps) => {
+const ProductInfo = ({product}: ProductInfoProps) => {
     const [quantity, setQuantity] = useState(1)
+
+    const {addProductsToCart} = useContext(CartContext)
+
 
     const handleDecreaseQuantity = () => {
         setQuantity((prev) => (prev === 1 ? prev : prev-1))
@@ -23,22 +24,26 @@ const ProductInfo = ({product: {name, baseprice, description, discount, totalPri
     const handleIncreaseQuantity = () => {
         setQuantity((prev) => prev+1)
     }
+
+    const handleAddToCart = () => {
+       addProductsToCart({...product, quantity})
+    }
     
     return (
         <div className="flex flex-col px-5 py-5">
-            <h2 className="text-lg">{name}</h2>
+            <h2 className="text-lg">{product.name}</h2>
             <p className="text-xs font-thin text-purple-300">Disponível em estoque</p>
 
             <div className="flex items-center mt-2 gap-2">
-                <h1 className="text-xl font-bold">R$ {totalPrice.toFixed(2)}</h1>
+                <h1 className="text-xl font-bold">R$ {product.totalPrice.toFixed(2)}</h1>
                 <Badge className="left-2 top-2">
                     <ArrowDownIcon size={16}/>
-                    {discount}%
+                    {product.discount}%
                 </Badge>
             </div>
 
-            {discount > 0 && (
-                <p className="text-sm line-through opacity-75">R$ {Number(baseprice).toFixed(2)}</p>
+            {product.discount > 0 && (
+                <p className="text-sm line-through opacity-75">R$ {Number(product.baseprice).toFixed(2)}</p>
             )}
 
             <div className="flex items-center gap-2 mt-4">
@@ -55,9 +60,9 @@ const ProductInfo = ({product: {name, baseprice, description, discount, totalPri
 
             <div className="flex flex-col mt-8 gap-2">
                 <h3 className="font-bold">Descrição</h3>
-                <p className="text-sm opacity-60 font-normal text-justify">{description}</p>
+                <p className="text-sm opacity-60 font-normal text-justify">{product.description}</p>
 
-                <Button className="w-full rounded-md h-[56px] mt-8 uppercase">
+                <Button className="w-full rounded-md h-[56px] mt-8 uppercase" onClick={handleAddToCart}>
                     Adicionar ao carrinho
                 </Button>
 
