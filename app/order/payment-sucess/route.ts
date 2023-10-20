@@ -17,7 +17,7 @@ export const POST = async (request: Request) => {
     const event = stripe.webhooks.constructEvent(
         text,
         signature,
-        process.env.STRIPE_WEBHOOK_SECRET_KEY
+        process.env.STRIPE_WEBHOOK_SECRET_KEY as string
     )
 
     if(event.type === 'checkout.session.completed'){
