@@ -50,31 +50,33 @@ const Cart = () => {
                     </div>
                 </ScrollArea>
 
-                <div className="flex flex-col gap-2 mb-8">
-                    <div className="flex items-center justify-between mt-4 text-sm">
-                        <p>SubTotal</p>
-                        <p>R$ {subTotal.toFixed(2)}</p>
-                    </div>
-                    <Separator/>
-                    <div className="flex items-center justify-between text-sm">
-                        <p>Descontos</p>
-                        <p>-R$ {totalDiscount.toFixed(2)}</p>
-                    </div>
-                    <Separator/>
-                    <div className="flex items-center justify-between text-sm">
-                        <p>Entrega</p>
-                        <p>Grátis</p>
-                    </div>
-                    <Separator/>
-                    <div className="flex items-center justify-between text-sm">
-                        <p>Total</p>
-                        <p>R$ {total.toFixed(2)}</p>
-                    </div>
+                {products.length > 0 && (
+                    <div className="flex flex-col gap-2 mb-8">
+                        <div className="flex items-center justify-between mt-4 text-sm">
+                            <p>SubTotal</p>
+                            <p>R$ {subTotal.toFixed(2)}</p>
+                        </div>
+                        <Separator/>
+                        <div className="flex items-center justify-between text-sm">
+                            <p>Descontos</p>
+                            <p>-R$ {totalDiscount.toFixed(2)}</p>
+                        </div>
+                        <Separator/>
+                        <div className="flex items-center justify-between text-sm">
+                            <p>Entrega</p>
+                            <p>Grátis</p>
+                        </div>
+                        <Separator/>
+                        <div className="flex items-center justify-between text-sm">
+                            <p>Total</p>
+                            <p>R$ {total.toFixed(2)}</p>
+                        </div>
 
-                    <Button className="w-full rounded-md h-[56px] mt-8 uppercase" onClick={handleFinishPurchase}>
-                        Finalizar compra
-                    </Button>
-                </div>
+                        <Button className="w-full rounded-md h-[56px] mt-8 uppercase" onClick={handleFinishPurchase}>
+                            Finalizar compra
+                        </Button>
+                    </div>
+                )}
             </div>
         </div>
     );
