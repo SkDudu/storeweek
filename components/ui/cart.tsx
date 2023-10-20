@@ -19,7 +19,7 @@ const Cart = () => {
 
         const stripe = await loadStripe(
             process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY as string
-            
+
         )
 
         stripe?.redirectToCheckout({
@@ -40,7 +40,7 @@ const Cart = () => {
                 <ScrollArea className="h-full">
                     <div className="mt-4">
                         {products.length > 0 ? (
-                            products.map(product => <CartItem key={product.id} product={computProductsTotalPrice(product as any)}/>)
+                            products.map(product => <CartItem key={product.id} product={computProductsTotalPrice(product as any) as any}/>)
                         ):(
                             <Card className="items-center justify-center">
                                 <CardContent className="items-center justify-center mt-4">
