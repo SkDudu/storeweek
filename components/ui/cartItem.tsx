@@ -66,7 +66,7 @@ const CartItem = ({product}: CartItemProps) => {
                     <Trash size={18}/>
                 </Button>
             </div>
-            <Separator className="mt-2"/>
+            <Separator className="mt-4"/>
         </div>
     );
 }
