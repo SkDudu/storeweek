@@ -35,7 +35,7 @@ export const CartContext = createContext<ICartContext>({
     removeFromCart: () => {}
 })
 
-const CartProvider = ({children}: {childres: ReactNode}) => {
+const CartProvider = ({children}: {children: ReactNode}) => {
     const [products, setProducts] = useState<CartProduct[]>([])
 
     const subTotal = useMemo(()=>{
