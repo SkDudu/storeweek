@@ -18,7 +18,7 @@ const Cart = () => {
         const checkout = await createCheckout(products)
 
         const stripe = await loadStripe(
-            process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY
+            process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY as string
         )
 
         stripe?.redirectToCheckout({
