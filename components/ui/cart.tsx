@@ -6,6 +6,7 @@ import CartItem from "./cartItem";
 import { computProductsTotalPrice } from "@/app/helpers/product";
 import { Separator } from "./separator";
 import { Card, CardContent } from "./card";
+import { Button } from "./button";
 
 const Cart = () => {
     const { products, total, totalDiscount, subTotal } = useContext(CartContext)
@@ -50,6 +51,10 @@ const Cart = () => {
                     <p>Total</p>
                     <p>R$ {total.toFixed(2)}</p>
                 </div>
+
+                <Button className="w-full rounded-md h-[56px] mt-8 uppercase">
+                    Finalizar compra
+                </Button>
             </div>
         </div>
     );
