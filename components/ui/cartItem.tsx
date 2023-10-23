@@ -4,12 +4,15 @@ import { ArrowLeftIcon, ArrowRightIcon, Trash } from "lucide-react";
 import Image from "next/image";
 import { Separator } from "./separator";
 import { useContext, useState } from "react";
+import { ToastAction } from "@/components/ui/toast";
+import { useToast } from "@/components/ui/use-toast";
 
 interface CartItemProps{
     product: CartProduct
 }
 
 const CartItem = ({product}: CartItemProps) => {
+    const { toast } = useToast()
     const { decreaseProductQuantity, increaseProductQuantity, removeFromCart } = useContext(CartContext)
 
     const handleClickDecrease = () => {
@@ -22,6 +25,10 @@ const CartItem = ({product}: CartItemProps) => {
 
     const handleRemoveItemFromCart = () => {
         removeFromCart(product.id)
+        toast({
+            title: "Item removido do carrinho.",
+            action: <ToastAction altText="Ok">Ok</ToastAction>,
+        })
     }
 
     return (

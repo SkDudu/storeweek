@@ -4,6 +4,8 @@ import { ProductWithTotalPrice } from "@/app/helpers/product";
 import { CartContext } from "@/app/providers/cart";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { ToastAction } from "@/components/ui/toast";
+import { useToast } from "@/components/ui/use-toast";
 import { ArrowDownIcon, ArrowLeftIcon, ArrowRightIcon, TruckIcon } from "lucide-react";
 import { useContext, useState } from "react";
 
@@ -12,6 +14,7 @@ interface ProductInfoProps {
 }
 
 const ProductInfo = ({product}: ProductInfoProps) => {
+    const { toast } = useToast()
     const [quantity, setQuantity] = useState(1)
 
     const {addProductsToCart} = useContext(CartContext)
@@ -27,8 +30,13 @@ const ProductInfo = ({product}: ProductInfoProps) => {
 
     const handleAddToCart = () => {
        addProductsToCart({...product, quantity})
+       toast({
+            title: "Adicionado ao carrinho!",
+            description: "Clique no ícone de compras para visualizar.",
+            action: <ToastAction altText="Ok">Ok</ToastAction>,
+        })
     }
-    
+
     return (
         <div className="flex flex-col px-5 py-5">
             <h2 className="text-lg">{product.name}</h2>
