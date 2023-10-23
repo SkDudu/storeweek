@@ -28,7 +28,6 @@ const SucessPurchase = () => {
                         <AccordionContent>
                             <div className="flex flex-col">
                                 <div className="flex flex-row">
-                                    <Image />
                                     <p>Produto tal</p>
                                 </div>
                             </div>
