@@ -11,8 +11,8 @@ export const createCheckout= async (products: CartProduct[]) => {
     const checkout = await stripe.checkout.sessions.create({
         payment_method_types:["card"],
         mode:"payment",
-        success_url:'https://storeweek.vercel.app',
-        cancel_url:'http://localhost:3000',
+        success_url:'https://storeweek.vercel.app/sucess-purchase',
+        cancel_url:'https://storeweek.vercel.app/cancel-purchase',
         line_items: products.map(product => {
             return {
                 price_data: {
